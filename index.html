@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RTX XITER - Painéis Oficiais</title>
     <style>
-        /* --- ESTILOS GERAIS --- */
         * {
             margin: 0;
             padding: 0;
@@ -19,7 +18,6 @@
             padding-bottom: 50px;
         }
 
-        /* --- CABEÇALHO --- */
         header {
             background: linear-gradient(90deg, #15181e, #1b2028);
             padding: 25px 20px;
@@ -47,7 +45,6 @@
             letter-spacing: 1px;
         }
 
-        /* --- CONTAINER DOS PRODUTOS --- */
         .container {
             max-width: 1000px;
             margin: 30px auto;
@@ -57,7 +54,6 @@
             gap: 20px;
         }
 
-        /* --- CARD DO PRODUTO --- */
         .card {
             background: #161a22;
             border: 1px solid #262c38;
@@ -114,7 +110,6 @@
             font-weight: bold;
         }
 
-        /* --- SELEÇÃO DE PLANOS --- */
         .plan-select-label {
             display: block;
             font-size: 0.85rem;
@@ -147,7 +142,6 @@
             margin-bottom: 15px;
         }
 
-        /* --- BOTÃO DE COMPRA --- */
         .btn-buy {
             background: linear-gradient(45deg, #ff0055, #ff5500);
             color: #fff;
@@ -178,7 +172,7 @@
 
     <main class="container">
 
-        <!-- PRODUTO 1: PAINEL-FF MAX -->
+        <!-- PRODUTO 1 -->
         <div class="card">
             <div>
                 <span class="badge">Oficial</span>
@@ -202,7 +196,7 @@
             </div>
         </div>
 
-        <!-- PRODUTO 2: AUXÍLIO DE MIRA PRO -->
+        <!-- PRODUTO 2 -->
         <div class="card" style="border-color: #ff0055;">
             <div>
                 <span class="badge" style="background-color: #00ff88; color: #000;">Mais Vendido</span>
@@ -226,7 +220,7 @@
             </div>
         </div>
 
-        <!-- PRODUTO 3: FFH4X 5.0 -->
+        <!-- PRODUTO 3 -->
         <div class="card">
             <div>
                 <span class="badge">VIP EXCLUSIVO</span>
@@ -252,7 +246,7 @@
             </div>
         </div>
 
-        <!-- PRODUTO 4: PAINEL FFH4X VIP (NOVO PRODUTO) -->
+        <!-- PRODUTO 4 (NOVO) -->
         <div class="card">
             <div>
                 <span class="badge" style="background-color: #00e1ff; color: #000;">NOVO</span>
@@ -280,17 +274,14 @@
     </main>
 
     <script>
-        // Coloques o seu número no formato: 55 + DDD + Seu Número
-        const SEU_NUMERO_WHATSAPP = "92 8141-2324"; 
+        const SEU_NUMERO_WHATSAPP = "5592999999999"; 
 
-        // Função que atualiza o valor na tela ao mudar a opção
         function atualizarPreco(idProduto) {
             const select = document.getElementById('select-' + idProduto);
             const valor = parseFloat(select.value).toFixed(2).replace('.', ',');
             document.getElementById('preco-' + idProduto).innerText = `R$ ${valor}`;
         }
 
-        // Função de envio para o WhatsApp
         function comprar(produto, selectId) {
             const select = document.getElementById(selectId);
             const opcaoSelecionada = select.options[select.selectedIndex];
@@ -306,4 +297,4 @@
     </script>
 
 </body>
-                    </html>
+</html>
