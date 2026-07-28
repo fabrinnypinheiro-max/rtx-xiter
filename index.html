@@ -252,6 +252,31 @@
             </div>
         </div>
 
+        <!-- PRODUTO 4: PAINEL FFH4X VIP (NOVO PRODUTO) -->
+        <div class="card">
+            <div>
+                <span class="badge" style="background-color: #00e1ff; color: #000;">NOVO</span>
+                <h3>PAINEL FFH4X VIP</h3>
+                <ul>
+                    <li>Painel Anti-Ban</li>
+                    <li>Anti-Blacklist</li>
+                    <li>100% Seguro</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p4">Escolha o Plano:</label>
+                <select id="select-p4" class="plan-select" onchange="atualizarPreco('p4')">
+                    <option value="10.00" data-plano="1 Dia">📅 1 Dia — R$ 10,00</option>
+                    <option value="20.00" data-plano="15 Dias">📅 15 Dias — R$ 20,00</option>
+                    <option value="30.00" data-plano="30 Dias">📅 30 Dias — R$ 30,00</option>
+                    <option value="50.00" data-plano="Permanente">♾️ Permanente — R$ 50,00</option>
+                </select>
+
+                <div class="price" id="preco-p4">R$ 10,00</div>
+                <button class="btn-buy" onclick="comprar('PAINEL FFH4X VIP', 'select-p4')">Comprar Agora</button>
+            </div>
+        </div>
+
     </main>
 
     <script>
@@ -281,4 +306,4 @@
     </script>
 
 </body>
-</html>
+                    </html>
