@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTX XITER - Painéis Oficiais</title>
+    <style>
+        /* --- ESTILOS GERAIS --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0d0f12;
+            color: #ffffff;
+            padding-bottom: 50px;
+        }
+
+        /* --- CABEÇALHO --- */
+        header {
+            background: linear-gradient(90deg, #15181e, #1b2028);
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 2px solid #ff0055;
+            box-shadow: 0 4px 15px rgba(255, 0, 85, 0.2);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        header h1 span {
+            color: #ff0055;
+        }
+
+        .owner-tag {
+            color: #00ff88;
+            font-size: 0.85rem;
+            margin-top: 6px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* --- CONTAINER DOS PRODUTOS --- */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- CARD DO PRODUTO --- */
+        .card {
+            background: #161a22;
+            border: 1px solid #262c38;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff0055;
+        }
+
+        .badge {
+            background-color: #ff0055;
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px 8px;
+            border-radius: 4px;
+            width: fit-content;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-bottom: 20px;
+            color: #a0aab8;
+            font-size: 0.95rem;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card ul li::before {
+            content: "✓";
+            color: #00ff88;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* --- SELEÇÃO DE PLANOS --- */
+        .plan-select-label {
+            display: block;
+            font-size: 0.85rem;
+            color: #a0aab8;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .plan-select {
+            width: 100%;
+            padding: 10px;
+            background-color: #0d0f12;
+            color: #ffffff;
+            border: 1px solid #262c38;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .plan-select:focus {
+            border-color: #ff0055;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        /* --- BOTÃO DE COMPRA --- */
+        .btn-buy {
+            background: linear-gradient(45deg, #ff0055, #ff5500);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            transition: opacity 0.2s;
+        }
+
+        .btn-buy:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>RTX <span>XITER</span></h1>
+        <p class="owner-tag">Dono dos Painéis: BIELZZ.VFX</p>
+    </header>
+
+    <main class="container">
+
+        <!-- PRODUTO 1: PAINEL-FF MAX -->
+        <div class="card">
+            <div>
+                <span class="badge">Oficial</span>
+                <h3>PAINEL-FF MAX</h3>
+                <ul>
+                    <li>Painel Anti-Ban</li>
+                    <li>Anti-Blacklist</li>
+                    <li>100% Seguro</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p1">Escolha o Plano:</label>
+                <select id="select-p1" class="plan-select" onchange="atualizarPreco('p1')">
+                    <option value="3.80" data-plano="1 Dia">🗓️ 1 Dia — R$ 3,80</option>
+                    <option value="20.99" data-plano="15 Dias">🗓️ 15 Dias — R$ 20,99</option>
+                    <option value="30.50" data-plano="1 Mês">🗓️ 1 Mês — R$ 30,50</option>
+                </select>
+
+                <div class="price" id="preco-p1">R$ 3,80</div>
+                <button class="btn-buy" onclick="comprar('PAINEL-FF MAX', 'select-p1')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- PRODUTO 2: AUXÍLIO DE MIRA PRO -->
+        <div class="card" style="border-color: #ff0055;">
+            <div>
+                <span class="badge" style="background-color: #00ff88; color: #000;">Mais Vendido</span>
+                <h3>AUXÍLIO DE MIRA PRO</h3>
+                <ul>
+                    <li>Painel Anti-Ban</li>
+                    <li>Anti-Blacklist</li>
+                    <li>100% Seguro</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p2">Escolha o Plano:</label>
+                <select id="select-p2" class="plan-select" onchange="atualizarPreco('p2')">
+                    <option value="3.80" data-plano="1 Dia">🟢 1 Dia — R$ 3,80</option>
+                    <option value="20.99" data-plano="15 Dias">🟢 15 Dias — R$ 20,99</option>
+                    <option value="39.99" data-plano="Permanente">🟢 Permanente — R$ 39,99</option>
+                </select>
+
+                <div class="price" id="preco-p2">R$ 3,80</div>
+                <button class="btn-buy" onclick="comprar('AUXÍLIO DE MIRA PRO', 'select-p2')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- PRODUTO 3: FFH4X 5.0 -->
+        <div class="card">
+            <div>
+                <span class="badge">VIP EXCLUSIVO</span>
+                <h3>FFH4X 5.0</h3>
+                <ul>
+                    <li>Painel Anti-Ban</li>
+                    <li>Anti-Blacklist</li>
+                    <li>100% Seguro</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p3">Escolha o Plano:</label>
+                <select id="select-p3" class="plan-select" onchange="atualizarPreco('p3')">
+                    <option value="15.60" data-plano="2 Dias">🗓️ 2 Dias — R$ 15,60</option>
+                    <option value="50.00" data-plano="1 Semana">🗓️ 1 Semana — R$ 50,00</option>
+                    <option value="100.00" data-plano="2 Semanas">🗓️ 2 Semanas — R$ 100,00</option>
+                    <option value="150.00" data-plano="1 Mês">🗓️ 1 Mês — R$ 150,00</option>
+                    <option value="450.00" data-plano="Permanente">👑 Permanente — R$ 450,00</option>
+                </select>
+
+                <div class="price" id="preco-p3">R$ 15,60</div>
+                <button class="btn-buy" onclick="comprar('FFH4X 5.0', 'select-p3')">Comprar Agora</button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Coloques o seu número no formato: 55 + DDD + Seu Número
+        const SEU_NUMERO_WHATSAPP = "92 8141-2324"; 
+
+        // Função que atualiza o valor na tela ao mudar a opção
+        function atualizarPreco(idProduto) {
+            const select = document.getElementById('select-' + idProduto);
+            const valor = parseFloat(select.value).toFixed(2).replace('.', ',');
+            document.getElementById('preco-' + idProduto).innerText = `R$ ${valor}`;
+        }
+
+        // Função de envio para o WhatsApp
+        function comprar(produto, selectId) {
+            const select = document.getElementById(selectId);
+            const opcaoSelecionada = select.options[select.selectedIndex];
+            
+            const plano = opcaoSelecionada.getAttribute('data-plano');
+            const preco = parseFloat(select.value).toFixed(2).replace('.', ',');
+
+            const mensagem = `Olá! Vim pelo site *RTX XITER* do *BIELZZ.VFX*.\n\nQuero comprar o produto: *${produto}*\nPlano: *${plano}*\nValor: *R$ ${preco}*\n\nComo faço para realizar o pagamento?`;
+            
+            const url = `https://wa.me/${SEU_NUMERO_WHATSAPP}?text=${encodeURIComponent(mensagem)}`;
+            window.open(url, '_blank');
+        }
+    </script>
+
+</body>
+</html>
