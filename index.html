@@ -246,7 +246,7 @@
             </div>
         </div>
 
-        <!-- PRODUTO 4 (NOVO) -->
+        <!-- PRODUTO 4 -->
         <div class="card">
             <div>
                 <span class="badge" style="background-color: #00e1ff; color: #000;">NOVO</span>
@@ -268,6 +268,28 @@
 
                 <div class="price" id="preco-p4">R$ 10,00</div>
                 <button class="btn-buy" onclick="comprar('PAINEL FFH4X VIP', 'select-p4')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- PRODUTO 5 (NOVO) -->
+        <div class="card">
+            <div>
+                <span class="badge" style="background-color: #ffcc00; color: #000;">OFERTA</span>
+                <h3>GERADOR DE SENSIBILIDADE PERFEITA</h3>
+                <ul>
+                    <li>Sensibilidade VIP</li>
+                    <li>Subir Capa Fácil</li>
+                    <li>100% Atualizado</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p5">Escolha o Plano:</label>
+                <select id="select-p5" class="plan-select" onchange="atualizarPreco('p5')">
+                    <option value="5.99" data-plano="Acesso Único">🎯 Acesso Único — R$ 5,99</option>
+                </select>
+
+                <div class="price" id="preco-p5">R$ 5,99</div>
+                <button class="btn-buy" onclick="comprar('GERADOR DE SENSIBILIDADE PERFEITA', 'select-p5')">Comprar Agora</button>
             </div>
         </div>
 
