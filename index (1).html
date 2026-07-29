@@ -271,7 +271,7 @@
             </div>
         </div>
 
-        <!-- PRODUTO 5 (NOVO) -->
+        <!-- PRODUTO 5 -->
         <div class="card">
             <div>
                 <span class="badge" style="background-color: #ffcc00; color: #000;">OFERTA</span>
@@ -290,6 +290,81 @@
 
                 <div class="price" id="preco-p5">R$ 5,99</div>
                 <button class="btn-buy" onclick="comprar('GERADOR DE SENSIBILIDADE PERFEITA', 'select-p5')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- PRODUTO 6 (NOVO: FFH4X PRO 100% CAPA) -->
+        <div class="card" style="border-color: #ff0055;">
+            <div>
+                <span class="badge" style="background-color: #ff0055; color: #fff;">🔥 PROMOÇÃO</span>
+                <h3>FFH4X PRO 100% CAPA</h3>
+                <ul>
+                    <li>100% Capa Garantido</li>
+                    <li>Anti-Ban & Anti-Blacklist</li>
+                    <li>Promoção válida até amanhã!</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p6">Escolha o Plano:</label>
+                <select id="select-p6" class="plan-select" onchange="atualizarPreco('p6')">
+                    <option value="30.00" data-plano="1 Dia">🗓️ 1 Dia — R$ 30,00</option>
+                    <option value="50.00" data-plano="15 Dias">🗓️ 15 Dias — R$ 50,00</option>
+                    <option value="70.00" data-plano="1 Mês">🗓️ 1 Mês — R$ 70,00</option>
+                    <option value="80.00" data-plano="Permanente (PROMOÇÃO)">🔥 Permanente — R$ 80,00 (De R$ 100,00)</option>
+                </select>
+
+                <div class="price" id="preco-p6">R$ 30,00</div>
+                <button class="btn-buy" onclick="comprar('FFH4X PRO 100% CAPA', 'select-p6')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- PRODUTO 7 (NOVO: CAVEIRA 2.0) -->
+        <div class="card">
+            <div>
+                <span class="badge" style="background-color: #a855f7; color: #fff;">NOVO</span>
+                <h3>CAVEIRA 2.0</h3>
+                <ul>
+                    <li>Auxílio Avançado</li>
+                    <li>Totalmente Seguro</li>
+                    <li>Suporte VIP</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p7">Escolha o Plano:</label>
+                <select id="select-p7" class="plan-select" onchange="atualizarPreco('p7')">
+                    <option value="25.00" data-plano="1 Dia">🗓️ 1 Dia — R$ 25,00</option>
+                    <option value="47.00" data-plano="15 Dias">🗓️ 15 Dias — R$ 47,00</option>
+                    <option value="70.00" data-plano="1 Mês">🗓️ 1 Mês — R$ 70,00</option>
+                    <option value="100.00" data-plano="Permanente">👑 Permanente — R$ 100,00</option>
+                </select>
+
+                <div class="price" id="preco-p7">R$ 25,00</div>
+                <button class="btn-buy" onclick="comprar('CAVEIRA 2.0', 'select-p7')">Comprar Agora</button>
+            </div>
+        </div>
+
+        <!-- PRODUTO 8 (NOVO: MENU PRÊMIO) -->
+        <div class="card">
+            <div>
+                <span class="badge" style="background-color: #00ff88; color: #000;">RECOMENDADO</span>
+                <h3>MENU PRÊMIO</h3>
+                <ul>
+                    <li>Menu Completo</li>
+                    <li>Anti-Ban & Anti-Blacklist</li>
+                    <li>Interface Exclusiva</li>
+                </ul>
+            </div>
+            <div>
+                <label class="plan-select-label" for="select-p8">Escolha o Plano:</label>
+                <select id="select-p8" class="plan-select" onchange="atualizarPreco('p8')">
+                    <option value="20.00" data-plano="1 Dia">🗓️ 1 Dia — R$ 20,00</option>
+                    <option value="40.00" data-plano="15 Dias">🗓️ 15 Dias — R$ 40,00</option>
+                    <option value="60.00" data-plano="1 Mês">🗓️ 1 Mês — R$ 60,00</option>
+                    <option value="80.00" data-plano="Permanente">👑 Permanente — R$ 80,00</option>
+                </select>
+
+                <div class="price" id="preco-p8">R$ 20,00</div>
+                <button class="btn-buy" onclick="comprar('MENU PRÊMIO', 'select-p8')">Comprar Agora</button>
             </div>
         </div>
 
@@ -319,4 +394,4 @@
     </script>
 
 </body>
-</html>
+                        </html>
