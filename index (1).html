@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bíblia Sagrada Digital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background: #1e293b;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #38bdf8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            color: #38bdf8;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 4px;
+        }
+
+        .controls {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+
+        select, button {
+            padding: 12px;
+            background-color: #1e293b;
+            color: #fff;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #38bdf8;
+        }
+
+        button {
+            background-color: #0284c7;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #0369a1;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 10px auto 40px;
+            padding: 20px;
+            background-color: #1e293b;
+            border-radius: 12px;
+            width: calc(100% - 30px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter-title {
+            color: #38bdf8;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .verse {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 1.05rem;
+            color: #e2e8f0;
+        }
+
+        .verse-number {
+            color: #38bdf8;
+            font-weight: bold;
+            font-size: 0.85rem;
+            margin-right: 6px;
+            vertical-align: super;
+        }
+
+        .loading {
+            text-align: center;
+            color: #94a3b8;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>📖 BÍBLIA SAGRADA</h1>
+        <p>Leitor Digital Completo</p>
+    </header>
+
+    <div class="controls">
+        <select id="select-livro" onchange="carregarCapitulos()">
+            <option value="">Carregando livros...</option>
+        </select>
+
+        <select id="select-capitulo">
+            <option value="1">Capítulo 1</option>
+        </select>
+
+        <button onclick="buscarCapitulo()">Ler Capítulo</button>
+    </div>
+
+    <div class="content" id="conteudo-biblia">
+        <div class="loading">Selecione um livro e clique em "Ler Capítulo" para começar a leitura.</div>
+    </div>
+
+    <script>
+        // API Gratuita da Bíblia em Português
+        const API_URL = "https://bible-api.com";
+        const TRANSLATION = "almeida"; // Almeida Recebida / Português
+
+        // Lista com os 66 livros da Bíblia em Português e o total de capítulos de cada um
+        const livrosBiblia = [
+            // Antigo Testamento
+            { nome: "Gênesis", id: "genesis", cap: 50 },
+            { nome: "Êxodo", id: "exodus", cap: 40 },
+            { nome: "Levítico", id: "leviticus", cap: 27 },
+            { nome: "Números", id: "numbers", cap: 36 },
+            { nome: "Deuteronômio", id: "deuteronomy", cap: 34 },
+            { nome: "Josué", id: "joshua", cap: 24 },
+            { nome: "Juízes", id: "judges", cap: 21 },
+            { nome: "Rute", id: "ruth", cap: 4 },
+            { nome: "1 Samuel", id: "1samuel", cap: 31 },
+            { nome: "2 Samuel", id: "2samuel", cap: 24 },
+            { nome: "1 Reis", id: "1kings", cap: 22 },
+            { nome: "2 Reis", id: "2kings", cap: 25 },
+            { nome: "1 Crônicas", id: "1chronicles", cap: 29 },
+            { nome: "2 Crônicas", id: "2chronicles", cap: 36 },
+            { nome: "Esdras", id: "ezra", cap: 10 },
+            { nome: "Neemias", id: "nehemiah", cap: 13 },
+            { nome: "Ester", id: "esther", cap: 10 },
+            { nome: "Jó", id: "job", cap: 42 },
+            { nome: "Salmos", id: "psalms", cap: 150 },
+            { nome: "Provérbios", id: "proverbs", cap: 31 },
+            { nome: "Eclesiastes", id: "ecclesiastes", cap: 12 },
+            { nome: "Cânticos", id: "songofsolomon", cap: 8 },
+            { nome: "Isaías", id: "isaiah", cap: 66 },
+            { nome: "Jeremias", id: "jeremiah", cap: 52 },
+            { nome: "Lamentações", id: "lamentations", cap: 5 },
+            { nome: "Ezequiel", id: "ezekiel", cap: 48 },
+            { nome: "Daniel", id: "daniel", cap: 12 },
+            { nome: "Oseias", id: "hosea", cap: 14 },
+            { nome: "Joel", id: "joel", cap: 3 },
+            { nome: "Amós", id: "amos", cap: 9 },
+            { nome: "Obadias", id: "obadiah", cap: 1 },
+            { nome: "Jonas", id: "jonah", cap: 4 },
+            { nome: "Miqueias", id: "micah", cap: 7 },
+            { nome: "Naum", id: "nahum", cap: 3 },
+            { nome: "Habacuc", id: "habakkuk", cap: 3 },
+            { nome: "Sofonias", id: "zephaniah", cap: 3 },
+            { nome: "Ageu", id: "haggai", cap: 2 },
+            { nome: "Zacarias", id: "zechariah", cap: 14 },
+            { nome: "Malaquias", id: "malachi", cap: 4 },
+            // Novo Testamento
+            { nome: "Mateus", id: "matthew", cap: 28 },
+            { nome: "Marcos", id: "mark", cap: 16 },
+            { nome: "Lucas", id: "luke", cap: 24 },
+            { nome: "João", id: "john", cap: 21 },
+            { nome: "Atos", id: "acts", cap: 28 },
+            { nome: "Romanos", id: "romans", cap: 16 },
+            { nome: "1 Coríntios", id: "1corinthians", cap: 16 },
+            { nome: "2 Coríntios", id: "2corinthians", cap: 13 },
+            { nome: "Gálatas", id: "galatians", cap: 6 },
+            { nome: "Efésios", id: "ephesians", cap: 6 },
+            { nome: "Filipenses", id: "philippians", cap: 4 },
+            { nome: "Colossenses", id: "colossians", cap: 4 },
+            { nome: "1 Tessalonicenses", id: "1thessalonians", cap: 5 },
+            { nome: "2 Tessalonicenses", id: "2thessalonians", cap: 3 },
+            { nome: "1 Timóteo", id: "1timothy", cap: 6 },
+            { nome: "2 Timóteo", id: "2timothy", cap: 4 },
+            { nome: "Tito", id: "titus", cap: 3 },
+            { nome: "Filemom", id: "philemon", cap: 1 },
+            { nome: "Hebreus", id: "hebrews", cap: 13 },
+            { nome: "Tiago", id: "james", cap: 5 },
+            { nome: "1 Pedro", id: "1peter", cap: 5 },
+            { nome: "2 Pedro", id: "2peter", cap: 3 },
+            { nome: "1 João", id: "1john", cap: 5 },
+            { nome: "2 João", id: "2john", cap: 1 },
+            { nome: "3 João", id: "3john", cap: 1 },
+            { nome: "Judas", id: "jude", cap: 1 },
+            { nome: "Apocalipse", id: "revelation", cap: 22 }
+        ];
+
+        // Preenche o Select de Livros ao carregar a página
+        window.onload = () => {
+            const selectLivro = document.getElementById('select-livro');
+            selectLivro.innerHTML = '';
+            
+            livrosBiblia.forEach((livro, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = livro.nome;
+                selectLivro.appendChild(option);
+            });
+
+            carregarCapitulos();
+            buscarCapitulo(); // Carrega Gênesis 1 de início
+        };
+
+        // Atualiza a quantidade de capítulos de acordo com o livro selecionado
+        function carregarCapitulos() {
+            const indexLivro = document.getElementById('select-livro').value;
+            const selectCap = document.getElementById('select-capitulo');
+            selectCap.innerHTML = '';
+
+            const totalCapitulos = livrosBiblia[indexLivro].cap;
+            for (let i = 1; i <= totalCapitulos; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Capítulo ${i}`;
+                selectCap.appendChild(option);
+            }
+        }
+
+        // Busca o texto do capítulo escolhido na API
+        async function buscarCapitulo() {
+            const indexLivro = document.getElementById('select-livro').value;
+            const capitulo = document.getElementById('select-capitulo').value;
+            const livro = livrosBiblia[indexLivro];
+
+            const conteiner = document.getElementById('conteudo-biblia');
+            conteiner.innerHTML = `<div class="loading">Carregando ${livro.nome} ${capitulo}...</div>`;
+
+            try {
+                const resposta = await fetch(`${API_URL}/${livro.id}+${capitulo}?translation=${TRANSLATION}`);
+                const dados = await resposta.json();
+
+                if (!dados.verses || dados.verses.length === 0) {
+                    conteiner.innerHTML = `<div class="loading">Não foi possível carregar este capítulo no momento. Tente novamente.</div>`;
+                    return;
+                }
+
+                let html = `<h2 class="chapter-title">${livro.nome} ${capitulo}</h2>`;
+                
+                dados.verses.forEach(v => {
+                    html += `
+                        <div class="verse">
+                            <span class="verse-number">${v.verse}</span>${v.text}
+                        </div>
+                    `;
+                });
+
+                conteiner.innerHTML = html;
+
+            } catch (erro) {
+                conteiner.innerHTML = `<div class="loading">Erro ao conectar com a rede. Verifique sua conexão com a internet.</div>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
